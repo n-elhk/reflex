@@ -1,0 +1,89 @@
+:host {
+  --ion-background-color: transparent;
+}
+
+ion-header .transparent {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+  backdrop-filter: blur(6px);
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  background: linear-gradient(180deg, #0f1624 0%, #1c2433 100%);;
+  filter: saturate(1.2);
+}
+
+.blob {
+  position: absolute;
+  width: 38vmin;
+  height: 38vmin;
+  border-radius: 50%;
+  filter: blur(30px) brightness(1.1);
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+
+.b1 { background: #60a5fa; top: 10%; left: 12%; }
+.b2 { background: #a78bfa; top: 25%; right: 10%; }
+.b3 { background: #34d399; bottom: 10%; left: 18%; }
+.b4 { background: #f472b6; top: 55%; right: 25%; }
+.b5 { background: #22d3ee; bottom: 15%; right: 8%; }
+.b6 { background: #f59e0b; top: 5%; right: 40%; }
+
+.container {
+  position: relative;
+  z-index: 1;
+  padding: clamp(20px, 4.5vmin, 40px);
+  display: grid;
+  gap: clamp(16px, 2vmin, 24px);
+  place-items: center;
+  min-height: calc(100dvh - var(--ion-safe-area-top));
+}
+
+.hero {
+  text-align: center;
+  margin-top: 8vh;
+}
+
+.title {
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  font-size: clamp(40px, 10vmin, 72px);
+  line-height: 1;
+  color: #f8fafc;
+  text-shadow: 0 6px 30px rgba(0,0,0,0.35);
+}
+
+.cta {
+  width: min(520px, 92vw);
+  display: grid;
+  gap: 14px;
+}
+
+.cta-play {
+  --background: linear-gradient(135deg, #22c55e, #06b6d4);
+  --background-focused: linear-gradient(135deg, #16a34a, #0891b2);
+  --background-activated: linear-gradient(135deg, #16a34a, #0891b2);
+  --box-shadow: 0 10px 30px rgba(6,182,212,0.35);
+  border-radius: 18px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  transform: translateZ(0); // GPU hint
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-secondary {
+  --border-color: rgba(255,255,255,0.25);
+  --color: #e2e8f0;
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+}

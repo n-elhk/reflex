@@ -1,0 +1,70 @@
+<ion-content fullscreen [scrollY]="false" forceOverscroll="false">
+  <!-- Fond animé -->
+  <div class="bg">
+    <span #blob class="blob b1"></span>
+    <span #blob class="blob b2"></span>
+    <span #blob class="blob b3"></span>
+    <span #blob class="blob b4"></span>
+    <span #blob class="blob b5"></span>
+    <span #blob class="blob b6"></span>
+  </div>
+
+  <!-- Hero -->
+  <section class="container">
+    <div #hero class="hero">
+      <h1 class="title">REFLEX</h1>
+      <!-- <p class="tagline">Concentration ⚡ Réflexes ⚡ Instantané</p> -->
+    </div>
+
+    <!-- CTA principal -->
+    <div class="cta">
+      <ion-button #stagger #ctaPlay expand="block" size="large" class="cta-play" (click)="onPlay()">
+        <ion-icon name="flash-outline" slot="start"></ion-icon>
+        Jouer
+      </ion-button>
+
+      <div class="grid">
+        <ion-button #stagger expand="block" fill="outline" class="btn-secondary">
+          <ion-icon name="speedometer-outline" slot="start"></ion-icon>
+          Entraînement
+        </ion-button>
+        <ion-button #stagger expand="block" fill="outline" class="btn-secondary">
+          <ion-icon name="trophy-outline" slot="start"></ion-icon>
+          Classements
+        </ion-button>
+        <ion-button #stagger expand="block" fill="outline" class="btn-secondary">
+          <ion-icon name="settings-outline" slot="start"></ion-icon>
+          Paramètres
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Bandeau infos -->
+    <!-- <div #stagger class="infos">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>Parties de 30–60 secondes. Parfaites pour les pauses.</span>
+    </div> -->
+  </section>
+
+  <!-- Modal "Comment jouer ?" -->
+  <!-- <ion-modal [isOpen]="isHowToOpen" (didDismiss)="closeHowTo()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Comment jouer ?</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeHowTo()">Fermer</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ol class="howto">
+          <li>Suivez les indications à l’écran le plus vite possible.</li>
+          <li>Chaque bonne action enchaîne le rythme et augmente le score.</li>
+          <li>Un seul faux pas… et la partie s’arrête !</li>
+        </ol>
+        <ion-button expand="block" class="cta-play" (click)="closeHowTo()">J’ai compris</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal> -->
+</ion-content>

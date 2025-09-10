@@ -1,0 +1,219 @@
+/* ==========================
+   Thème & variables
+   ========================== */
+:host {
+  --green: oklch(79.07% 0.171 149.68);
+  --red: oklch(64.42% 0.206 25.85);
+}
+
+/* ==========================
+   HUD (score / record)
+   ========================== */
+.hud {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+/* ==========================
+   Zone de jeu
+   ========================== */
+.game-area {
+  /* --speed peut être overridé depuis TS via [style.--speed] */
+  --speed: 3000ms;
+
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    oklch(22.89% 0.029 265.91) 0%,
+    oklch(27.06% 0.027 265.86) 100%
+  );
+}
+
+/* ==========================
+   Bandeau règle (footer)
+   ========================== */
+ion-footer {
+  padding: 1rem;
+  border-radius: 8px;
+}
+.color-banner {
+  text-align: center;
+  &.green {
+    background: var(--green);
+  }
+  &.red {
+    background: var(--red);
+  }
+}
+
+/* ==========================
+   lines (orientation dynamique)
+   ========================== */
+.lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 0;
+}
+
+/* UP/DOWN => 3 COLONNES */
+.move-up .lines,
+.move-down .lines {
+  flex-direction: row;
+}
+
+/* LEFT/RIGHT => 3 LIGNES */
+.move-right .lines,
+.move-left .lines {
+  flex-direction: column;
+}
+
+.line {
+  position: relative; /* référentiel pour les sprites */
+  flex: 1 1 0;
+  overflow: hidden;
+}
+
+/* ==========================
+   Sprite (tuile/flèche)
+   ========================== */
+.sprite {
+  --size: 64px;
+
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  place-items: center;
+  will-change: left, top;
+
+  .sprite-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background: oklch(100% 0 0 / 0.08);
+    border: 1px solid oklch(100% 0 0 / 0.12);
+    backdrop-filter: blur(4px);
+    display: grid;
+    place-content: center;
+  }
+
+  ion-icon {
+    font-size: 34px;
+    color: #fff;
+    filter: drop-shadow(0 2px 8px oklch(0% 0 0 / 0.35));
+  }
+}
+
+/* ==========================
+   Animations (délais fournis EN INLINE)
+   ========================== */
+/* ➜ Lignes (RIGHT/LEFT) : centré verticalement dans SA line */
+.move-right .line .sprite,
+.move-left .line .sprite {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.move-right .line .sprite {
+  left: -30%;
+  animation: slideRight var(--speed) linear infinite;
+}
+.move-left .line .sprite {
+  left: 130%;
+  animation: slideLeft var(--speed) linear infinite;
+}
+
+/* ➜ Colonnes (UP/DOWN) : centré horizontalement dans SA line */
+.move-down .line .sprite,
+.move-up .line .sprite {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.move-down .line .sprite {
+  top: -30%;
+  animation: fall var(--speed) linear infinite;
+}
+.move-up .line .sprite {
+  top: 130%;
+  animation: rise var(--speed) linear infinite;
+}
+
+/* Keyframes */
+@keyframes slideRight {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 130%;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    left: 130%;
+  }
+  100% {
+    left: -30%;
+  }
+}
+@keyframes fall {
+  0% {
+    top: -30%;
+  }
+  100% {
+    top: 130%;
+  }
+}
+@keyframes rise {
+  0% {
+    top: 130%;
+  }
+  100% {
+    top: -30%;
+  }
+}
+
+/* ==========================
+   Game Over (pause)
+   ========================== */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  z-index: 7;
+  padding: 24px;
+  color: white;
+  background: linear-gradient(
+    180deg,
+    oklch(12.56% 0.024 266.61 / 0.55),
+    oklch(12.56% 0.024 266.61 / 0.75)
+  );
+
+  h1 {
+    margin-bottom: 6px;
+  }
+  p {
+    opacity: 0.85;
+    margin-bottom: 18px;
+  }
+}
+
+.game-area.over .sprite {
+  animation-play-state: paused;
+  opacity: 0.55;
+  filter: grayscale(0.15);
+}

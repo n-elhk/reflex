@@ -1,0 +1,52 @@
+<ion-content [fullscreen]="true" [scrollY]="false">
+  <!-- HUD -->
+  <div class="hud">
+    <app-stat-ingame-card label="Score" [points]="score()" />
+    <app-stat-ingame-card label="Record" [points]="bestScore()" />
+  </div>
+
+  <!-- Zone de jeu -->
+  <div
+    #gameArea
+    class="game-area"
+    [class.over]="gameOver()"
+    [class.move-right]="movementDirection() === 'right'"
+    [class.move-left]="movementDirection() === 'left'"
+    [class.move-up]="movementDirection() === 'up'"
+    [class.move-down]="movementDirection() === 'down'"
+    [style.--speed]="speedCss()"
+  >
+    <div class="lines">
+      @for (line of lines; let lineIndex = $index; track lineIndex) {
+      <div class="line">
+        @for (spritIndex of sprites; track spritIndex) {
+        <div
+          class="sprite"
+          [style.animationDelay.ms]="delayMs(spritIndex, lineIndex)"
+        >
+          <div class="sprite-inner">
+            <ion-icon [name]="iconNameFor()" />
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+    @if (gameOver()) {
+    <div class="overlay">
+      <h1>Game Over</h1>
+      <p>Score {{ score() }} — Record {{ bestScore() }}</p>
+      <ion-button fill="solid" (click)="restart()">Rejouer</ion-button>
+    </div>
+    }
+  </div>
+
+  <ion-footer
+    class="color-banner"
+    [class.green]="isGreen()"
+    [class.red]="!isGreen()"
+  >
+    <div>{{ helpText() }}</div>
+  </ion-footer>
+</ion-content>
