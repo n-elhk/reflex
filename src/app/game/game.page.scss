@@ -1,6 +1,5 @@
-/* ==========================
-   Thème & variables
-   ========================== */
+@use "./game.animation";
+
 :host {
   --green: oklch(79.07% 0.171 149.68);
   --red: oklch(64.42% 0.206 25.85);
@@ -10,12 +9,10 @@
    Zone de jeu
    ========================== */
 .game-area {
-  /* --speed peut être overridé depuis TS via [style.--speed] */
   --speed: 3000ms;
-
   position: relative;
   width: 100%;
-  height: calc(100vh - 56px);
+  height: calc(100dvh - 56px);
   overflow: hidden;
   background: linear-gradient(
     180deg,
@@ -102,12 +99,9 @@ ion-footer {
   }
 }
 
-/* ==========================
-   Animations (délais fournis EN INLINE)
-   ========================== */
-/* ➜ Lignes (RIGHT/LEFT) : centré verticalement dans SA line */
-.move-right .line .sprite,
-.move-left .line .sprite {
+
+/* Position horizontale (droite/gauche) */
+:is(.move-right, .move-left) .line .sprite {
   top: 50%;
   transform: translateY(-50%);
 }
@@ -116,14 +110,14 @@ ion-footer {
   left: -30%;
   animation: slideRight var(--speed) linear infinite;
 }
+
 .move-left .line .sprite {
   left: 130%;
   animation: slideLeft var(--speed) linear infinite;
 }
 
-/* ➜ Colonnes (UP/DOWN) : centré horizontalement dans SA line */
-.move-down .line .sprite,
-.move-up .line .sprite {
+/* Position verticale (haut/bas) */
+:is(.move-up, .move-down) .line .sprite {
   left: 50%;
   transform: translateX(-50%);
 }
@@ -132,54 +126,12 @@ ion-footer {
   top: -30%;
   animation: fall var(--speed) linear infinite;
 }
+
 .move-up .line .sprite {
   top: 130%;
   animation: rise var(--speed) linear infinite;
 }
 
-/* Keyframes */
-@keyframes slideRight {
-  0% {
-    left: -30%;
-  }
-  100% {
-    left: 130%;
-  }
-}
-@keyframes slideLeft {
-  0% {
-    left: 130%;
-  }
-  100% {
-    left: -30%;
-  }
-}
-@keyframes fall {
-  0% {
-    top: -30%;
-  }
-  100% {
-    top: 130%;
-  }
-}
-@keyframes rise {
-  0% {
-    top: 130%;
-  }
-  100% {
-    top: -30%;
-  }
-}
-
-/* Animation bounce / pulsation */
-@keyframes bounceScale {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-}
 
 /* ==========================
    Game Over (pause)
