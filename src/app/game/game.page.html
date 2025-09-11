@@ -1,15 +1,9 @@
 <ion-content [fullscreen]="true" [scrollY]="false">
-  <!-- HUD -->
-  <div class="hud">
-    <app-stat-ingame-card label="Score" [points]="score()" />
-    <app-stat-ingame-card label="Record" [points]="bestScore()" />
-  </div>
-
   <!-- Zone de jeu -->
   <div
-    #gameArea
+    appGameArea
     class="game-area"
-    [class.over]="gameOver()"
+    [class.over]="isOver()"
     [class.move-right]="movementDirection() === 'right'"
     [class.move-left]="movementDirection() === 'left'"
     [class.move-up]="movementDirection() === 'up'"
@@ -25,7 +19,7 @@
           [style.animationDelay.ms]="delayMs(spritIndex, lineIndex)"
         >
           <div class="sprite-inner">
-            <ion-icon [name]="iconNameFor()" />
+            <ion-icon [name]="iconName()" />
           </div>
         </div>
         }
@@ -33,7 +27,7 @@
       }
     </div>
 
-    @if (gameOver()) {
+    @if (isOver()) {
     <div class="overlay">
       <h1>Game Over</h1>
       <p>Score {{ score() }} — Record {{ bestScore() }}</p>
@@ -42,10 +36,19 @@
     }
   </div>
 
+  @let countdownValue = countdown(); @if(countdownValue){
+
+  <ion-progress-bar
+    color="primary"
+    [value]="countdownValue.remaining / countdownValue.duration"
+    [buffer]="1"
+  />
+  }
+
   <ion-footer
     class="color-banner"
-    [class.green]="isGreen()"
-    [class.red]="!isGreen()"
+    [class.green]="isMovmentRound()"
+    [class.red]="!isMovmentRound()"
   >
     <div>{{ helpText() }}</div>
   </ion-footer>

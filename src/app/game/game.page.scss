@@ -6,19 +6,6 @@
   --red: oklch(64.42% 0.206 25.85);
 }
 
-/* ==========================
-   HUD (score / record)
-   ========================== */
-.hud {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  z-index: 5;
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-}
 
 /* ==========================
    Zone de jeu
@@ -43,7 +30,7 @@
    ========================== */
 ion-footer {
   padding: 1rem;
-  border-radius: 8px;
+  // border-radius: 8px;
 }
 .color-banner {
   text-align: center;
