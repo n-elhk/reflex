@@ -45,19 +45,6 @@ export class GamePage implements AfterViewInit {
   readonly roundSpeedMs = signal(3500);
   readonly speedCss = computed(() => `${this.roundSpeedMs()}ms`);
 
-  // readonly score$ = toObservable(this.score);
-  // private readonly updateBestScore$ = this.score$.pipe(
-  //   filter(s => s > this.bestScore()),
-  //   tap((score) => localStorage.setItem('bestScore', String(score)))
-  // )
-
-  // private readonly reset$ = new BehaviorSubject<string>('next');
-
-  // private readonly gameTimer$ = this.reset$.pipe(
-  //   switchMap(() => timer(10_000)),
-  //   map(() => this.endGame()),
-  // );
-
   constructor() {
     addIcons({
       arrowBackOutline, arrowForwardOutline, arrowUpOutline, arrowDownOutline

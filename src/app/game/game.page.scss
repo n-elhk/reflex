@@ -6,7 +6,6 @@
   --red: oklch(64.42% 0.206 25.85);
 }
 
-
 /* ==========================
    Zone de jeu
    ========================== */
@@ -30,7 +29,6 @@
    ========================== */
 ion-footer {
   padding: 1rem;
-  // border-radius: 8px;
 }
 .color-banner {
   text-align: center;
@@ -94,6 +92,7 @@ ion-footer {
     backdrop-filter: blur(4px);
     display: grid;
     place-content: center;
+    animation: bounceScale 1.2s ease-in-out infinite; /* pulsation continue */
   }
 
   ion-icon {
@@ -169,6 +168,16 @@ ion-footer {
   }
   100% {
     top: -30%;
+  }
+}
+
+/* Animation bounce / pulsation */
+@keyframes bounceScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
   }
 }
 
