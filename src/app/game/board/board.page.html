@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true" [scrollY]="false">
+  <!-- Zone de jeu pilotée par Canvas -->
+  <div
+    class="game-area"
+    appGameRunner
+    [arrowDirection]="arrowDirection()"
+    [movementDirection]="movementDirection()"
+    [score]="score()"
+  >
+    <!-- Le canvas requis par contentChild.required -->
+    <canvas appCanvasElement></canvas>
+  </div>
+
+  @let countdownValue = countdown(); @if(countdownValue){
+
+  <ion-progress-bar
+    color="primary"
+    [value]="countdownValue.remaining / countdownValue.duration"
+    [buffer]="1"
+  />
+  }
+
+  <ion-footer
+    class="color-banner"
+    [class.green]="isMovmentRound()"
+    [class.red]="!isMovmentRound()"
+  >
+    <div>{{ helpText() }}</div>
+  </ion-footer>
+</ion-content>

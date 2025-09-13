@@ -1,4 +1,4 @@
-export type SwipeDirection = 'left' | 'right' | 'up' | 'down';
+export type Direction = 'left' | 'right' | 'up' | 'down';
 
 export type RoundType = 'movement' | 'arrow';
 
@@ -9,8 +9,8 @@ export type GameState = {
     score: number;
     bestScore: number;
     roundType: RoundType;
-    movementDirection: SwipeDirection;
-    arrowDirection: SwipeDirection;
+    movementDirection: Direction;
+    arrowDirection: Direction;
 }
 
 

@@ -1,0 +1,26 @@
+/* ==========================
+   Game Over (pause)
+   ========================== */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  z-index: 7;
+  padding: 24px;
+  color: white;
+  background: linear-gradient(
+    180deg,
+    oklch(12.56% 0.024 266.61 / 0.55),
+    oklch(12.56% 0.024 266.61 / 0.75)
+  );
+
+  h1 {
+    margin-bottom: 6px;
+  }
+  p {
+    opacity: 0.85;
+    margin-bottom: 18px;
+  }
+}

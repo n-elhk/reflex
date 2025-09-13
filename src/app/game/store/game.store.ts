@@ -1,11 +1,11 @@
 import { computed } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { patchState, signalStore, withComputed, withHooks, withMethods, withProps, withState } from '@ngrx/signals';
-import { GameState, SwipeDirection } from './game.state';
+import { GameState, Direction } from './game.state';
 import { randomizeRound, setGameOver } from './game.methods';
 import { arrowIconWithDirection } from './game.fn';
 import { withStorageSync } from '@angular-architects/ngrx-toolkit';
-import { endWith, filter, interval, map, merge, mergeWith, startWith, switchMap, takeUntil, takeWhile, tap, timer } from 'rxjs';
+import { filter, interval, map, merge, mergeWith, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
 
 const initialState: GameState = {
   gameStatus: 'playing',
@@ -71,7 +71,7 @@ export const GameStore = signalStore(
   }),
 
   withMethods((store) => ({
-    handleSwipe(dir: SwipeDirection): void {
+    handleSwipe(dir: Direction): void {
       const expected = store.isMovmentRound() ? store.movementDirection() : store.arrowDirection();
       const isCorrect = dir === expected;
       if (isCorrect) {

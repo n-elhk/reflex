@@ -1,0 +1,46 @@
+:host {
+  --green: oklch(79.07% 0.171 149.68);
+  --red: oklch(64.42% 0.206 25.85);
+}
+
+.game-area {
+  display: grid;
+  place-items: center;
+  height: calc(100dvh - 56px);
+
+  touch-action: none; /* on gère les gestes nous-mêmes */
+  background: linear-gradient(
+    180deg,
+    oklch(22.89% 0.029 265.91) 0%,
+    oklch(27.06% 0.027 265.86) 100%
+  );
+}
+
+/* Le canvas remplit 100% de la zone de jeu */
+.game-area canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;
+
+  /* UX mobile */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Laisse l’anti-alias natif (pas de image-rendering pour ce cas vectoriel) */
+}
+
+ion-footer {
+  padding: 1rem;
+}
+.color-banner {
+  text-align: center;
+  &.green {
+    background: var(--green);
+  }
+  &.red {
+    background: var(--red);
+  }
+}
