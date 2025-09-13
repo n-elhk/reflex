@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { IonContent, IonButton } from '@ionic/angular/standalone';
 
 import { GameStore } from '../store/game.store';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './result.page.html',
   styleUrls: ['./result.page.scss'],
   imports: [IonContent, IonButton],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultPage {
   private readonly gameStore = inject(GameStore);

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { IonContent, IonFooter, IonProgressBar } from '@ionic/angular/standalone';
 import { type GestureDetail, createGesture } from '@ionic/core';
 
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './board.page.html',
   styleUrls: ['./board.page.scss'],
   imports: [IonContent, IonFooter, IonProgressBar, GameRunner, CanvasElement],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardPage implements AfterViewInit {
 

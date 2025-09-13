@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, QueryList, viewChild, ViewChild, viewChildren, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, QueryList, viewChild, ViewChild, viewChildren, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonContent, IonIcon, IonButton } from '@ionic/angular/standalone';
 import gsap from 'gsap';
@@ -8,6 +8,7 @@ import gsap from 'gsap';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [IonContent, IonIcon, IonButton],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements AfterViewInit, OnDestroy {
   private readonly router = inject(Router);
@@ -17,13 +18,11 @@ export class HomePage implements AfterViewInit, OnDestroy {
   readonly ctaPlayRef = viewChild.required('ctaPlay', { read: ElementRef });
   readonly blobs = viewChildren('blob', { read: ElementRef });
 
-  private bgTl?: gsap.core.Timeline;
-  private enterTl?: gsap.core.Timeline;
+  private bgTl = gsap.timeline({ repeat: -1, yoyo: true });;
+  private enterTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } });
   // isHowToOpen = false;
 
   ngAfterViewInit(): void {
-    // Entrée des éléments
-    this.enterTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } });
     this.enterTl
       .from(this.heroRef().nativeElement, { y: 30, opacity: 0 })
       .to(this.ctaPlayRef().nativeElement, { scale: 1.04, yoyo: true, repeat: -1, ease: 'sine.inOut', duration: 0.9 }, '-=0.3');
@@ -38,21 +37,20 @@ export class HomePage implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     // Nettoyage
-    this.bgTl?.kill();
-    this.enterTl?.kill();
+    this.bgTl.kill();
+    this.enterTl.kill();
     window.removeEventListener('deviceorientation', this.handleTilt as any);
     window.removeEventListener('mousemove', this.handleMouse as any);
   }
 
   private animateBlobs() {
     const nodes = this.blobs().map(b => b.nativeElement);
-    this.bgTl = gsap.timeline({ repeat: -1, yoyo: true });
     nodes.forEach((node, i) => {
       const rX = gsap.utils.random(-30, 30);
       const rY = gsap.utils.random(-20, 20);
       const rS = gsap.utils.random(0.9, 1.25);
       const d = gsap.utils.random(4, 7);
-      this.bgTl!.to(
+      this.bgTl.to(
         node,
         { x: rX, y: rY, scale: rS, duration: d, ease: 'sine.inOut' },
         i * 0.12
