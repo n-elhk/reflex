@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { GameStore } from './game/store/game.store';
 
 export const routes: Routes = [
   {
@@ -7,6 +8,7 @@ export const routes: Routes = [
   },
   {
     path: 'game',
+    providers: [GameStore],
     loadComponent: () => import('./game/game.page').then(({ GamePage }) => GamePage),
     children: [
       {

@@ -20,6 +20,6 @@ export class ResultPage {
 
   restart() {
     this.gameStore.replay();
-    this.router.navigate(['/game']);
+    this.router.navigate(['/game',  { replaceUrl: true }]);
   }
 }

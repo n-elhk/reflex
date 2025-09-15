@@ -35,7 +35,7 @@ export class BoardPage implements AfterViewInit {
 
   private readonly redirectToReulstPage$ = toObservable(this.gameStore.isOver).pipe(
     filter(Boolean),
-    tap(() => this.router.navigate(['game', 'result']))
+    tap(() => this.router.navigate(['game', 'result'], { replaceUrl: true }))
   );
 
   constructor() {

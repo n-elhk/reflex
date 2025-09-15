@@ -6,7 +6,6 @@ import { GameStore } from './store/game.store';
 @Component({
   template: '<ion-router-outlet></ion-router-outlet>',
   imports: [IonRouterOutlet],
-  providers: [GameStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamePage { }
